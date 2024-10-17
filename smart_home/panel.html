@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Control Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Smart Home Control Panel</h1>
+
+        <!-- Current Time -->
+        <div id="time" class="time">
+            <p>Current Time: <span id="current-time"></span></p>
+        </div>
+
+        <!-- Relay Control -->
+        <div class="relay">
+            <div class="relay-item">
+                <button id="relay1" onclick="toggleRelay(1)">
+                    <span class="relay-label">Lamp 1</span>
+                    <span id="relay1-status" class="status off">OFF</span>
+                </button>
+            </div>
+            <div class="relay-item">
+                <button id="relay2" onclick="toggleRelay(2)">
+                    <span class="relay-label">Lamp 2</span>
+                    <span id="relay2-status" class="status off">OFF</span>
+                </button>
+            </div>
+            <div class="relay-item">
+                <button id="relay3" onclick="toggleRelay(3)">
+                    <span class="relay-label">Lamp 3</span>
+                    <span id="relay3-status" class="status off">OFF</span>
+                </button>
+            </div>
+            <div class="relay-item">
+                <button id="relay4" onclick="toggleRelay(4)">
+                    <span class="relay-label">Lamp 4</span>
+                    <span id="relay4-status" class="status off">OFF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to update the current time
+        function updateTime() {
+            const timeElement = document.getElementById('current-time');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            timeElement.textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000); // Update time every second
+        updateTime(); // Initial call
+
+        // Function to toggle relay and update status
+        function toggleRelay(relay) {
+            const button = document.getElementById('relay' + relay);
+            const statusElement = document.getElementById('relay' + relay + '-status');
+            const isOn = statusElement.textContent === 'ON'; // Check current status
+            const action = isOn ? 'off' : 'on'; // Determine the new action
+
+            // Connect to ESP8266 server
+            fetch(`http://your-esp8266-ip/relay/${relay}/${action}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Toggle the text and button color
+                        if (isOn) {
+                            statusElement.textContent = 'OFF'; // Change to OFF
+                            button.classList.remove('on');
+                            button.classList.add('off');
+                        } else {
+                            statusElement.textContent = 'ON'; // Change to ON
+                            button.classList.remove('off');
+                            button.classList.add('on');
+                        }
+                    } else {
+                        console.error('Failed to toggle the relay.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+    </script>
+</body>
+
+</html>

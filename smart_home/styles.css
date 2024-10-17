@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f3f3f3 0%, #e2e2e2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+}
+
+.container {
+  text-align: center;
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Current Time Display */
+.time {
+  margin-bottom: 30px;
+}
+
+.time p {
+  font-size: 18px;
+  color: #555;
+}
+
+/* Relay Button and Status */
+.relay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center the buttons */
+  gap: 15px;
+}
+
+.relay-item button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  /* Fixed width for buttons */
+  padding: 15px;
+  font-size: 16px;
+  background-color: #f0f0f0;
+  /* Default gray color */
+  color: #333;
+  /* Text color */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.relay-item button:hover {
+  background-color: #ddd;
+}
+
+.relay-item button:active {
+  transform: scale(0.98);
+}
+
+/* Status color based on ON/OFF state */
+.relay-item button .status {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.relay-label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Button background changes based on ON/OFF status */
+.relay-item button.on {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.relay-item button.off {
+  background-color: #f44336;
+  color: white;
+}
