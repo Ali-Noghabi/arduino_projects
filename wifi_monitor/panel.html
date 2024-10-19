@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
+            color: #4285f4;
+        }
+
+        .status {
+            margin: 15px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .status span {
+            font-weight: bold;
+            color: #4285f4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='container'>
+        <div class='header'>ESP8266 WiFi Status</div>
+        <div class='status'>Signal Strength (RSSI): <span>" + String(signalStrength) + " dBm</span></div>
+        <div class='status'>Ping to Router: <span>" + String(pingSuccess ? "Success" : "Failed") + "</span></div>
+        <div class='status'>Total Pings: <span>" + String(pingCount) + "</span></div>
+        <div class='status'>Failed Pings: <span>" + String(failedPingCount) + "</span></div>
+        <div class='status'>Connection Stability: <span>" + String(stability) + "%</span></div>
+        <div class='status'>ESP8266 IP Address: <span>" + espIP + "</span></div>
+    </div>
+</body>
+
+</html>
